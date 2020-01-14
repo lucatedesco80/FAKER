@@ -1,0 +1,14 @@
+Extends layout 
+block content
+  header
+    h1 #{title} <!-- questo title va a prendere il title di index.js quindi poeti --> <!-- quello sotto è il nostro vettore di oggetti people: people_file.persone -->
+  hr
+  br
+  article
+    each p in people 
+      div 
+        a(href= `/dettagli/${p.number}`) #{p.name}
+        br
+        br
+        img(src=`${p.image}`, width= 300, height= 300)
+        hr

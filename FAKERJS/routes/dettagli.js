@@ -1,50 +1,20 @@
-var express = require('express'); // METTERE SEMPRE
-var router = express.Router(); // METTERE SEMPRE
-const fs = require('fs');
+var createError = require ('http-errors'); // per creare l'errore
+var express = require('express');
+var router = express.Router();
 var faker = require('faker');
+var people = require ('../people.json');
 
-
-router.get('/', function(req, res, next) {
- res.send(createFakePerson());
-});
-
-function createFakePerson()
-{
-
-    let ogg = {persone:[]};  // CREAZIONE OGGETTO JSON
-}
-
-
-for(let i = 0; i<10; i++)
-{
- let randomNumber = faker.random.number();//nome libreria. nome metodo. nome dentro il metodo
- let NomeCasuale = faker.name.findName(); 
- let randomEmail = faker.internet.email();
- let randomPhone = faker.phone.phoneNumber();
- let randomImage = faker.image.people();
- let randomAddress = faker.address.country();
- let randomSite = faker.internet.url();
- let randomText = faker.lorem.text();
-
-}
-
- // dentro l'oggetto person creo l'abbinamento tra variabile vuota: valore libreria
- let person = {
-   number:randomNumber,
-   name:randomName,
-   email:randomEmail,
-   phone:randomPhone,
-   image:randomImage,
-   address:randomAddress,
-   site:randomSite,
-   text:randomText,
- }
- // pusho ogni volta person dentro il vettore persone dentro l'oggetto ogg
- ogg.persone.push(person);
-}
- let data = JSON.stringify(ogg);
- fs.writeFileSync('people.json', data);
- return data;
-}
-
-module.exports = router;
+// come se ci fosse davanti dettagli
+router.get('/:number/', function(req,res,next){
+    let poeta = people.persone.find(p => p.number == req.params.number) //poeta contiene la corrispondenza dei 2 parametri: controlla se il numero nell'URL è uguale ad un numero dentro il json
+    if (typeof poeta === "undefined"){
+        return next (createError(404, 'poeta non trovato'));
+    }
+    else{
+        res.render ('dettagli',{
+            title : `dettagli di: ${poeta.name}`,
+            poeta, // contiene tutto il contenuto del'json di quel numero specifico inserito nell' URL
+        }) ; ;
+    }
+})
+module.exports = router;ss

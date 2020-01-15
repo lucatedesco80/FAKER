@@ -3,9 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dettagliRouter = require('./routes/dettagli');
+var generateRouter = require('./routes/generate');
+var apiRouter = require('./routes/api');
+
 
 var app = express();
 
@@ -19,11 +25,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// ASSEGNAZIONE PERCORSI ALLE MIE PAGINE JS
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/dettagli', dettagliRouter)
+app.use('/users/generate', generateRouter)
+app.use('/api', apiRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+    // CREAZIONE DELL'ERRORE
   next(createError(404));
 });
 
@@ -35,6 +47,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  // TI MANDA ALLA PAGINA ERROR.PUG
   res.render('error');
 });
 

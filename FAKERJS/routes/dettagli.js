@@ -11,10 +11,11 @@ router.get('/:number/', function(req,res,next){
         return next (createError(404, 'poeta non trovato'));
     }
     else{
+        // .render ti porta alla pagina tra ''
         res.render ('dettagli',{
             title : `dettagli di: ${poeta.name}`,
             poeta, // contiene tutto il contenuto del'json di quel numero specifico inserito nell' URL
         }) ; ;
     }
 })
-module.exports = router;ss
+module.exports = router;

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-
+//in verifica queesto
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dettagliRouter = require('./routes/dettagli');
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // ASSEGNAZIONE PERCORSI ALLE MIE PAGINE JS
+// e questo
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/dettagli', dettagliRouter)

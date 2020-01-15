@@ -17,7 +17,7 @@ function createFakePerson()
 for(let i = 0; i<10; i++)
 {
  let randomNumber = faker.random.number();//nome libreria. nome metodo. nome dentro il metodo
- let NomeCasuale = faker.name.findName(); 
+ let randomName = faker.name.findName(); 
  let randomEmail = faker.internet.email();
  let randomPhone = faker.phone.phoneNumber();
  let randomImage = faker.image.people();
